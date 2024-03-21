@@ -1,4 +1,4 @@
-from ClassesLeilao import Usuario, Lance, Leilao, Avaliador
+from ClassesLeilao import Usuario, Lance, Leilao
 from unittest import TestCase
 
 
@@ -17,14 +17,11 @@ class TestAvaliador(TestCase):
         self.leilao.propoe(self.lance_pedro)
         self.leilao.propoe(lance_bibi)
 
-        avaliador = Avaliador()
-        avaliador.avalia(self.leilao)
-
         menor_valor_esperado = 100.00
         maior_valor_esperado = 150.00
 
-        self.assertEqual(menor_valor_esperado, avaliador.menor_lance)
-        self.assertEqual(maior_valor_esperado, avaliador.maior_lance)
+        self.assertEqual(menor_valor_esperado, self.leilao.menor_lance)
+        self.assertEqual(maior_valor_esperado, self.leilao.maior_lance)
         
 
     def teste_retorno_maior_menor_valor_lances_adicionados_ordem_decrescente(self):
@@ -34,24 +31,18 @@ class TestAvaliador(TestCase):
         self.leilao.propoe(lance_bibi)
         self.leilao.propoe(self.lance_pedro)
 
-        avaliador = Avaliador()
-        avaliador.avalia(self.leilao)
-
         menor_valor_esperado = 100.00
         maior_valor_esperado = 150.00
 
-        self.assertEqual(menor_valor_esperado, avaliador.menor_lance)
-        self.assertEqual(maior_valor_esperado, avaliador.maior_lance)
+        self.assertEqual(menor_valor_esperado, self.leilao.menor_lance)
+        self.assertEqual(maior_valor_esperado, self.leilao.maior_lance)
 
 
     def teste_retorno_maior_menor_valor_lance_unico(self):
         self.leilao.propoe(self.lance_pedro)
 
-        avaliador = Avaliador()
-        avaliador.avalia(self.leilao)
-
-        self.assertEqual(100.0, avaliador.menor_lance)
-        self.assertEqual(100.0, avaliador.maior_lance)
+        self.assertEqual(100.0, self.leilao.menor_lance)
+        self.assertEqual(100.0, self.leilao.maior_lance)
 
     def teste_retorno_maior_menor_valor_lances_multiplos(self):
         bibi = Usuario('Bibi')
@@ -62,13 +53,10 @@ class TestAvaliador(TestCase):
         self.leilao.propoe(lance_bibi)
         self.leilao.propoe(self.lance_pedro)
         self.leilao.propoe(lance_juanito_jones)
-
-        avaliador = Avaliador()
-        avaliador.avalia(self.leilao)
-
+        
         menor_valor_esperado = 100.0
         maior_valor_esperado = 200.0
 
-        self.assertEqual(menor_valor_esperado, avaliador.menor_lance)
-        self.assertEqual(maior_valor_esperado, avaliador.maior_lance)
+        self.assertEqual(menor_valor_esperado, self.leilao.menor_lance)
+        self.assertEqual(maior_valor_esperado, self.leilao.maior_lance)
 
