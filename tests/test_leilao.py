@@ -1,5 +1,6 @@
 from ClassesLeilao import Usuario, Lance, Leilao
 from unittest import TestCase
+from tests.excessoes import LanceInvalido
 
 
 class TestLeilao(TestCase):
@@ -25,7 +26,7 @@ class TestLeilao(TestCase):
         
 
     def teste_nao_deve_permitir_propor_lance_ordem_descrecente(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(LanceInvalido):
             bibi = Usuario('Bibi', 1000)
             lance_bibi = Lance(bibi, 150)
         
@@ -74,7 +75,7 @@ class TestLeilao(TestCase):
 
     def teste_nao_permite_propor_lance_caso_mesma_pessoa(self):
         lance_pedro_novo = Lance(self.pedro, 200)
-        with self.assertRaises(ValueError):
+        with self.assertRaises(LanceInvalido):
             #esse assertRaises é o método de teste em que o meu teste espera o ValueError, no caso, ele dará erro pois estou tentando dar 2 lances com o mesmo usuário
             self.leilao.propoe(self.lance_pedro)
             self.leilao.propoe(lance_pedro_novo)

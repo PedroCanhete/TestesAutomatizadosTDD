@@ -1,4 +1,5 @@
 from ClassesLeilao import Usuario, Lance, Leilao
+from tests.excessoes import LanceInvalido
 import pytest
 
 
@@ -28,5 +29,5 @@ def test_deve_permiri_propor_lance_quando_valor_eh_igual_carteira(pedro, leilao)
 
 
 def test_nao_deve_permitir_propor_quando_valor_maior_que_carteira(pedro, leilao):
-    with pytest.raises(ValueError):
+    with pytest.raises(LanceInvalido):
         pedro.propoe_lance(leilao, 200)
