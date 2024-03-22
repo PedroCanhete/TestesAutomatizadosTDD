@@ -4,14 +4,14 @@ from unittest import TestCase
 
 class TestLeilao(TestCase):
     def setUp(self):
-        self.pedro = Usuario('Pedro')
+        self.pedro = Usuario('Pedro', 1000)
         self.lance_pedro = Lance(self.pedro, 100)
         self.leilao = Leilao('Carro 0Km')
 
     
     
     def teste_retorno_maior_menor_valor_lances_adicionados_ordem_crescente(self):
-        bibi = Usuario('Bibi')
+        bibi = Usuario('Bibi', 1000)
         lance_bibi = Lance(bibi, 150)
 
         self.leilao.propoe(self.lance_pedro)
@@ -26,7 +26,7 @@ class TestLeilao(TestCase):
 
     def teste_nao_deve_permitir_propor_lance_ordem_descrecente(self):
         with self.assertRaises(ValueError):
-            bibi = Usuario('Bibi')
+            bibi = Usuario('Bibi', 1000)
             lance_bibi = Lance(bibi, 150)
         
             self.leilao.propoe(lance_bibi)
@@ -40,9 +40,9 @@ class TestLeilao(TestCase):
         self.assertEqual(100.0, self.leilao.maior_lance)
 
     def teste_retorno_maior_menor_valor_lances_multiplos(self):
-        bibi = Usuario('Bibi')
+        bibi = Usuario('Bibi', 1000)
         lance_bibi = Lance(bibi, 150)
-        juanito_jones = Usuario('juanito')
+        juanito_jones = Usuario('juanito', 500)
         lance_juanito_jones = Lance(juanito_jones, 200.0)
 
         self.leilao.propoe(self.lance_pedro)
@@ -62,7 +62,7 @@ class TestLeilao(TestCase):
         self.assertEqual(1, quantidade_lances_recebidos)
         
     def test_deve_permitir_propor_lance_caso_ultimo_lance_usuario_diferente(self):
-        yuri = Usuario('Yuri')
+        yuri = Usuario('Yuri', 500)
         lance_do_yuri = Lance(yuri, 200)
 
         self.leilao.propoe(self.lance_pedro)
